@@ -1,6 +1,6 @@
 /*
- *  This program was used for performace test 1 on 2/26/16.
- *  Course strategy: move foward, turn left, drive up ramp at high speed.
+ *  This program was used for performance test 1 on 2/26/16.
+ *  Course strategy: move forward, turn left, drive up ramp at high speed.
  */
 
 #include <FEHLCD.h>
