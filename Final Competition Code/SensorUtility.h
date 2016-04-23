@@ -1,3 +1,6 @@
+/*
+    This file includes methods which process sensor input and the switch directions.
+*/
 #ifndef SENSORUTILITY_H
 #define SENSORUTILITY_H
 
@@ -10,7 +13,7 @@ bool light_on(double cdsValue)
     return (cdsValue < LIGHT_THRESH);
 }
 
-//Waits until start light is detected or until too much time passes
+//Waits until start light is detected or until "seconds" passes
 void wait_for_start_light(int seconds)
 {
     LCD.WriteLine(sensor.Value());
@@ -52,6 +55,7 @@ bool is_red()
     return false;
 }
 
+//For debugging
 void print_useful_info()
 {
     while (!microBackLeft.Value())
@@ -66,22 +70,18 @@ void print_useful_info()
     }
 }
 
-
+//Methods to return each switch direction
 //forward = 1, backward = -1
 int rightSwitchDirection()
 {
     if(RPS.BlueSwitchDirection() == 2) return -1;
     return 1;
 }
-
-//forward = 1, backward = -1
 int middleSwitchDirection()
 {
     if(RPS.WhiteSwitchDirection() == 2) return -1;
     return 1;
 }
-
-//forward = 1, backward = -1
 int leftSwitchDirection()
 {
     if(RPS.RedSwitchDirection() == 2) return -1;

@@ -1,9 +1,17 @@
+/*
+    This file includes the most robust drive methods. Included here are
+    the specific methods for climbing the ramp and hitting switches. The
+    methods here build off of sleepy driving and utilize a combination of
+    RPS navigation and encoder driving. 
+*/
+
 #ifndef COMPLETEDRIVING_H
 #define COMPLETEDRIVING_H
 
 #include <SleepyDriving.h>
 #include <SensorUtility.h>
 
+//Drive to an x-coordinate using encoders, then checks x
 void driveToX(float expectedDistance, float x)
 {
     LCD.Write("Driving to x = ");
@@ -14,11 +22,12 @@ void driveToX(float expectedDistance, float x)
     check_x(x);
 }
 
+//Drives using RPS. Takes into account the RPS offset.
 void driveToXRPS(float x)
 {
     LCD.Write("(RPS) Driving to x = ");
     LCD.WriteLine(x);
-    if(RPSDropped()) return;
+    if(RPSDropped()) return; //failsafe
 
     if (RPS.Heading() > 90 && RPS.Heading() < 270)
     {
@@ -85,6 +94,7 @@ void confirmY(float y)
     check_y(y);
 }
 
+//Turn and check all in one
 void turnToHeading(float expectedTurn, float heading)
 {
     LCD.Write("Turning to ");
@@ -102,10 +112,9 @@ void confirmHeading(float heading)
     check_heading(heading);
 }
 
-
 void climbRamp(int count)
 {
-    if(count >= 30)
+    if(count >= 30) //30 attempts possible cause why not?
     {
         LCD.WriteLine("!!!!Failed ramp!!!!");
         lasso.SetDegree(LASSO_ERROR_REPORT);
@@ -142,12 +151,13 @@ void climbRamp()
     climbRamp(0);
 }
 
+//Takes in 1 or -1 to flip the switch either forward or backward
 void flipSwitch(int direction)
 {
     lasso.SetDegree(LASSO_MID);
     Sleep(400);
     //states here
-    move(SWITCH_FLIP_SPD, -1.5*direction, 1); //$//Probably can be even lower than 1 second
+    move(SWITCH_FLIP_SPD, -1.5*direction, 1); 
     Sleep(300);
     lasso.SetDegree(LASSO_UP);
     Sleep(300);

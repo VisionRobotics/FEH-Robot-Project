@@ -9,9 +9,9 @@
 
 
 //Useful sleep times (int = milliseconds float = seconds)
-#define DFT_SLEEP 50 //was 75
-#define CHECK_SLEEP 0.1
-#define FUEL_LIGHT_READ_TIME 0.25 //WAS 0.5
+#define DFT_SLEEP 50 		//for regular driving
+#define CHECK_SLEEP 0.1 	//for pulse driving
+#define FUEL_LIGHT_READ_TIME 0.25 
 #define RPS_TIMEOUT_DURATION 0.6
 #define ENCODER_TIMEOUT 4
 
@@ -25,14 +25,14 @@
 #define DEPOSIT_SPD 26
 #define SLOW_SPD 20
 #define PULSE_DRIVE_SPD 15
-#define PULSE_DIST_POSITION 0.10 //inches (was 0.25)
-#define PULSE_DIST_HEADING 0.41 //degree (was 0.82)
-#define SPEED_THRESHOLD 4 //inches to drive
+#define PULSE_DIST_POSITION 0.10 //inches 
+#define PULSE_DIST_HEADING 0.41  //degrees 
+#define SPEED_THRESHOLD 4 		 //inches to drive
 
 
 //RPS
-#define HEADING_THRESHOLD 0.000152 //+/- 1 degrees
-#define POSITION_THRESHOLD 0.5 //+-0.25
+#define HEADING_THRESHOLD 0.000152 // +/- 1 degrees
+#define POSITION_THRESHOLD 0.5 // +-0.25 degrees
 #define DELAY_TIME 0.5
 #define EXPECTED_RPS_START_X 10.25 
 #define EXPECTED_RPS_START_Y 10.5
@@ -41,10 +41,10 @@
 
 
 //CdS cell thresholds
-#define LIGHT_THRESH .6 //For detecting start light
+#define LIGHT_THRESH .6   //For detecting start light
 #define BLUE_THRESH .4
 #define RED_THRESH .15
-#define COLOR_THRESH .35
+#define COLOR_THRESH .35  //For isRed()
 
 
 //Arm angles

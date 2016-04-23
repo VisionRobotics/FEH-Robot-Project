@@ -1,3 +1,9 @@
+/*
+    These methods expand on the methods in BasicDriving. Since a sleep statement
+    is almost always called after a basic drive method, "sleepy" versions were
+    created which call their namesake method then sleep for DFT_SLEEP time.  
+*/
+    
 #ifndef SLEEPYDRIVING_H
 #define SLEEPYDRIVING_H
 

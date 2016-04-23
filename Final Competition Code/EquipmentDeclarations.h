@@ -53,6 +53,8 @@ void lowerPArm()
 	LCD.WriteLine("Lowering payload arm");
 	pArm.SetDegree(P_ARM_DOWN);
 }
+
+//Places arm in the payload deposit angle
 void depositPArm()
 {
     LCD.WriteLine("Lowering payload arm");

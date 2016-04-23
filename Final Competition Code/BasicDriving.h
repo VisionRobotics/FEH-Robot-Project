@@ -1,3 +1,10 @@
+/*
+    These methods drive the robot using encoder counts. 
+    This file includes the basic ability to move forward and
+    make turns. Note that most of the methods have overloaded versions
+    with default speeds and timeouts for convenience. 
+*/
+
 #ifndef BASICDRIVING_H
 #define BASICDRIVING_H
 
@@ -24,12 +31,14 @@ void move_indef(float percent) //Drives forever....Careful bro
 
 void move(float percent, float inch, float timeout) //Moves inputted inches
 {
-    if(inch < 0)
+    if(inch < 0) //drives in reverse
     {
         inch = -inch;
         percent = -percent;
     }
 
+    //Different counts for different precision. Slow counts allows for 
+    //more precise movement and less overshooting when driving. 
     double fullCounts = inch * INCH_TO_COUNTS;
     double slowCounts = fullCounts - abs(percent) / 105.0 * INCH_TO_COUNTS;
 
@@ -44,6 +53,7 @@ void move(float percent, float inch, float timeout) //Moves inputted inches
     {
         if((left_encoder.Counts() + right_encoder.Counts()) / 2.0 > slowCounts && percent > SLOW_SPD)
         {
+            //Slowing down near the end of the trip
             rightSetPercent(abs(percent)/percent*SLOW_SPD);
             leftSetPercent(abs(percent)/percent*SLOW_SPD);
         }
@@ -124,6 +134,5 @@ void pressButton()
 	move_indef(-0.6*DRIVE_SPD);
     Sleep(5.6);
 }
-
 
 #endif // BASICDRIVING_H

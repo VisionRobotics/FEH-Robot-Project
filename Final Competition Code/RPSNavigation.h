@@ -1,12 +1,18 @@
+/*
+	This file includes all the utility methods needed to operate the robot
+	using RPS. 
+*/
+
 #ifndef RPS_NAVIGATION_H
 #define RPS_NAVIGATION_H
 
 #include <BasicDriving.h>
 
+//Calculated difference between our expected coordinates and the RPS values.
 float RPSOffsetX = 0;
 float RPSOffsetY = 0;
 
-typedef struct vect{
+typedef struct vect{ //holds robot's position
     float x;
     float y;
 }Vect;
@@ -15,6 +21,9 @@ bool RPSDetected()
 {
 	return RPS.X() >= 0;
 }
+
+/*Finds the RPS offset between the expected start coordinates and the actual
+  RPS values to reduce coordinate variance between courses. */
 void calculateRobotOffset()
 {
 	if(RPSDetected())
@@ -24,6 +33,7 @@ void calculateRobotOffset()
 	}
     else
     {
+        //Letting us know to restart the robot
         LCD.SetBackgroundColor(YELLOW);
         LCD.WriteLine("!*!*!*!*!RPS not read on start!*!*!*!*!");
         LCD.SetBackgroundColor(BLACK);
@@ -45,7 +55,7 @@ float getRobotHeading()
 	return RPS.Heading();
 }
 
-bool RPSDropped()
+bool RPSDropped() 
 {
 	if(!RPSDetected())
 	{
@@ -54,6 +64,7 @@ bool RPSDropped()
 		{
 			if(TimeNow() - startTime > RPS_TIMEOUT_DURATION)
 			{
+                //On-screen error reporting
                 LCD.SetBackgroundColor(SCARLET);
 				LCD.WriteLine("!!RPS dropped and timed out!!");
                 LCD.SetBackgroundColor(BLACK);
@@ -161,7 +172,6 @@ void check_y(float y_coordinate)
         check_y_minus(y_coordinate);
     }
 }
-
 
 void check_x(float x_coordinate)
 {
